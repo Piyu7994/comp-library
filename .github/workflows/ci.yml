@@ -1,16 +1,21 @@
 name: CI
+
+#When this Pipeline will run
 on:
   push:
     branches:
-      - main
+      - master
   pull_request:
     branches:
-      - main
+      - master
   merge_group:
     types:
       - checks_requested
 
+#The workflow has many jobs
 jobs:
+  #Lint Job (Perform Lint & Type Checking)
+  # ✅ Purpose: Ensures the code is formatted correctly and has no TypeScript errors.
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -18,14 +23,16 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup
-        uses: ./.github/actions/setup
+        uses: ./.github/actions/setup #Custom Setup Action
 
       - name: Lint files
-        run: yarn lint
+        run: yarn lint  #Runs ESLint
 
       - name: Typecheck files
-        run: yarn typecheck
+        run: yarn typecheck # Runs Typescript Type Chekcing
 
+  # Test Job
+  # ✅ Purpose: Runs Jest unit tests to ensure the code works correctly.
   test:
     runs-on: ubuntu-latest
     steps:
@@ -38,6 +45,8 @@ jobs:
       - name: Run unit tests
         run: yarn test --maxWorkers=2 --coverage
 
+  # Builds Library Job
+  # ✅ Purpose: Builds the React Native component library (`yarn prepare` usually runs bob build if react-native-builder-bob is used).
   build-library:
     runs-on: ubuntu-latest
     steps:
@@ -50,6 +59,11 @@ jobs:
       - name: Build package
         run: yarn prepare
 
+  # Builds Android Build Job
+  # ✅ Purpose:
+    # Ensures the Android example app compiles successfully.
+    # Uses Turborepo caching to speed up builds.
+    # Installs the JDK & Gradle dependencies if necessary.
   build-android:
     runs-on: ubuntu-latest
     env:
@@ -106,6 +120,11 @@ jobs:
         run: |
           yarn turbo run build:android --cache-dir="${{ env.TURBO_CACHE_DIR }}"
 
+  #Build iOS Build Job
+  # ✅ Purpose:
+    # Ensures the iOS example app builds successfully.
+    # Uses Turborepo caching to speed up builds.
+    # Restores or installs CocoaPods for iOS dependencies.
   build-ios:
     runs-on: macos-latest
     env:
