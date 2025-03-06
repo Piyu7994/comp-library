@@ -1,5 +1,5 @@
 {
-  "name": "comp-library",
+  "name": "@piyu7994/comp-library",
   "version": "0.1.0",
   "description": "UI Components Library in React Native",
   "source": "./src/index.tsx",
@@ -61,7 +61,7 @@
   },
   "homepage": "https://github.com/Piyu7994/comp-library#readme",
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+    "registry": "https://npm.pkg.github.com/@Piyu7994"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^17.0.2",
