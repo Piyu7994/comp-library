@@ -1,6 +1,6 @@
 {
   "name": "@piyu7994/comp-library",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "UI Components Library in React Native",
   "source": "./src/index.tsx",
   "main": "./lib/commonjs/index.js",
