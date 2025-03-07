@@ -5,6 +5,8 @@ import {
   type ViewStyle,
 } from 'react-native';
 
+import BasicButton from './components/atoms/BasicButton';
+
 const LINKING_ERROR =
   `The package 'comp-library' doesn't seem to be linked. Make sure: \n\n` +
   Platform.select({ ios: "- You have run 'pod install'\n", default: '' }) +
@@ -24,3 +26,5 @@ export const CompLibraryView =
     : () => {
         throw new Error(LINKING_ERROR);
       };
+
+export { BasicButton };
