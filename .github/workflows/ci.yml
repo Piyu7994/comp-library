@@ -197,6 +197,11 @@ jobs:
           node-version: 18
           registry-url: https://npm.pkg.github.com/
           scope: "@piyu7994"
+          
+      - name: Set up .npmrc
+        run: |
+          echo "@piyu7994:registry=https://npm.pkg.github.com/" >> ~/.npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}" >> ~/.npmrc
 
       - name: Install dependencies
         run: yarn install
